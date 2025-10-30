@@ -53,3 +53,4 @@ C:\Users\d_karyakin\Desktop\Projects\baclet\MetricsDemo\MetricsDemo\obj\Debug\ne
 C:\Users\d_karyakin\Desktop\Projects\baclet\MetricsDemo\MetricsDemo\obj\Debug\net8.0\MetricsDemo.pdb
 C:\Users\d_karyakin\Desktop\Projects\baclet\MetricsDemo\MetricsDemo\obj\Debug\net8.0\MetricsDemo.genruntimeconfig.cache
 C:\Users\d_karyakin\Desktop\Projects\baclet\MetricsDemo\MetricsDemo\obj\Debug\net8.0\ref\MetricsDemo.dll
+C:\Users\d_karyakin\Desktop\Projects\baclet\MetricsDemo\MetricsDemo\obj\Debug\net8.0\MetricsDemo.sourcelink.json

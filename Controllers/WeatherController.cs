@@ -5,7 +5,7 @@ namespace MetricsDemo.Controllers;
 
 [ApiController]
 [Route("test")]
-public class WeatherController : ControllerBase
+public class WeatherController(IBusinessMetrics businessMetrics) : ControllerBase
 {
     private static readonly string[] Summaries =
     [
@@ -41,9 +41,16 @@ public class WeatherController : ControllerBase
     }
 
     [HttpPost("temperature")]
-    [UseMetrics("min", "max", "cityName", "IsSuccess")]
+    //[UseMetrics("min", "max", "cityName", "IsSuccess")]
     public IActionResult FilterByTemperature([FromBody] MyClass myClass)
     {
+        businessMetrics.Track("user_registered", new
+        {
+            region = "11111111111", 
+            source = "222222222222",
+            name = "ХУЙ",
+        });
+        
         var rng = new Random();
         var data = Enumerable.Range(1, 10)
             .Select(_ => rng.Next(-10, 40))

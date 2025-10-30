@@ -10,6 +10,7 @@ builder.Services.AddControllers();
 // 🔹 Swagger (чтобы работал UI)
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddSingleton<IBusinessMetrics, BusinessMetricsService>();
 
 // 🔹 Подключаем сервис метрик
 builder.Services.AddSingleton<MetricsService>();
@@ -22,6 +23,7 @@ builder.Services.AddOpenTelemetry()
             .AddAspNetCoreInstrumentation()
             .AddRuntimeInstrumentation()
             .AddMeter("MetricsDemoApp")
+            .AddMeter("BusinessMetrics")
             .AddPrometheusExporter();
     });
 
