@@ -4,39 +4,37 @@ using OpenTelemetry.Resources;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// 🔹 Подключаем контроллеры
+// Контроллеры и Swagger
 builder.Services.AddControllers();
-
-// 🔹 Swagger (чтобы работал UI)
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddSingleton<IBusinessMetrics, BusinessMetricsService>();
 
-// 🔹 Подключаем сервис метрик
+// Наши сервисы
+builder.Services.AddSingleton<IMeterRegistry, MeterRegistry>();
+builder.Services.AddSingleton<IBusinessMetrics, BusinessMetricsService>();
 builder.Services.AddSingleton<MetricsService>();
 
-// 🔹 Конфигурация OpenTelemetry + Prometheus
+// Конфигурация OpenTelemetry
 builder.Services.AddOpenTelemetry()
     .WithMetrics(mb =>
     {
-        mb.SetResourceBuilder(ResourceBuilder.CreateDefault().AddService("MetricsDemoApp"))
+        mb
+            .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService("MetricsDemoApp"))
             .AddAspNetCoreInstrumentation()
             .AddRuntimeInstrumentation()
-            .AddMeter("MetricsDemoApp")
-            .AddMeter("BusinessMetrics")
+            // ⬇️ Просто добавляем имена всех метрик, которые могут быть в приложении
+            .AddMeter("payment", "purchase", "user")
             .AddPrometheusExporter();
     });
 
 var app = builder.Build();
 
-// 🔹 Swagger middleware
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
-// 🔹 Маршрутизация и метрики
 app.UseRouting();
 app.MapControllers();
 app.MapPrometheusScrapingEndpoint();

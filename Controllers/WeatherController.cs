@@ -44,12 +44,10 @@ public class WeatherController(IBusinessMetrics businessMetrics) : ControllerBas
     //[UseMetrics("min", "max", "cityName", "IsSuccess")]
     public IActionResult FilterByTemperature([FromBody] MyClass myClass)
     {
-        businessMetrics.Track("user_registered", new
-        {
-            region = "11111111111", 
-            source = "222222222222",
-            name = "ХУЙ",
-        });
+        
+        businessMetrics.Track("payment", "payment_success", new { region = "1111111", source = "222222" });
+        businessMetrics.Track("purchase", "item_added", new { sku = "3333333", quantity = 2 });
+        businessMetrics.Track("user", "registered", new { channel = "4444444" });
         
         var rng = new Random();
         var data = Enumerable.Range(1, 10)
@@ -57,6 +55,12 @@ public class WeatherController(IBusinessMetrics businessMetrics) : ControllerBas
             .Where(t => t >= myClass.Min && t <= myClass.Max);
 
         return Ok(data);
+        /*businessMetrics.Track("user_registered", new
+        {
+            region = "11111111111", 
+            source = "222222222222",
+            name = "ХУЙ",
+        });*/
     }
 
     public class MyClass 
