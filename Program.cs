@@ -19,11 +19,11 @@ builder.Services.AddOpenTelemetry()
     .WithMetrics(mb =>
     {
         mb
-            .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService("MetricsDemoApp"))
+            .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService(builder.Environment.ApplicationName))
             .AddAspNetCoreInstrumentation()
             .AddRuntimeInstrumentation()
             // ⬇️ Просто добавляем имена всех метрик, которые могут быть в приложении
-            .AddMeter("payment", "purchase", "user")
+            .AddMeter("paymentSystems", "purchase", "user")
             .AddPrometheusExporter();
     });
 

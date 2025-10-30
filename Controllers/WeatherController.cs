@@ -45,9 +45,11 @@ public class WeatherController(IBusinessMetrics businessMetrics) : ControllerBas
     public IActionResult FilterByTemperature([FromBody] MyClass myClass)
     {
         
-        businessMetrics.Track("payment", "payment_success", new { region = "1111111", source = "222222" });
-        businessMetrics.Track("purchase", "item_added", new { sku = "3333333", quantity = 2 });
-        businessMetrics.Track("user", "registered", new { channel = "4444444" });
+        businessMetrics.Track("paymentSystems", "Octo", new { currency = "RU", IsSuccess = true });
+        businessMetrics.Track("paymentSystems", "BiPaid", new { currency = "USD", IsSuccess = true });
+        businessMetrics.Track("paymentSystems", "PagSmile", new { currency = "BYN", IsSuccess = true });
+        /*businessMetrics.Track("purchase", "item_added", new { sku = "3333333", quantity = 2 });
+        businessMetrics.Track("user", "registered", new { channel = "4444444" });*/
         
         var rng = new Random();
         var data = Enumerable.Range(1, 10)
