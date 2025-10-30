@@ -52,7 +52,7 @@ public class WeatherController : ControllerBase
         return Ok(data);
     }
 
-    public class MyClass
+    public class MyClass 
     {
         public int Min { get; set; }
         public int Max { get; set; }
